@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:5000'; // Update this for production
+const API_URL = 'https://sunalgorithms-backend.onrender.com'; // Replace with your actual Render URL
 
 export const sendEmail = async (formData, type, category = '') => {
   try {
