@@ -10,13 +10,13 @@ const SocialMediaModal = ({ isOpen, onClose }) => {
       name: 'Facebook',
       url: 'https://www.facebook.com/SunAlgorithms',
       icon: '📘',
-      username: 'Sun Algorithms'
+      username: '@SunAlgorithms'
     },
     {
       name: 'Instagram',
       url: 'https://www.instagram.com/SunAlgorithms',
       icon: '📸',
-      username: 'Sun Algorithms'
+      username: '@SunAlgorithms'
     }
   ];
 

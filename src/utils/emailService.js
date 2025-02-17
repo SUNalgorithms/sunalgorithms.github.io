@@ -1,4 +1,4 @@
-const API_URL = 'https://sunalgorithms-backend.onrender.com'; // Replace with your actual Render URL
+const API_URL = import.meta.env.VITE_API_URL || 'https://sunalgorithms-backend.onrender.com';
 
 export const sendEmail = async (formData, type, category = '') => {
   try {
@@ -13,7 +13,7 @@ export const sendEmail = async (formData, type, category = '') => {
       formData: formData
     };
 
-    console.log('Sending email data:', emailData); // Add logging
+    console.log('Sending email data:', emailData);
 
     const response = await fetch(`${API_URL}/api/send-email`, {
       method: 'POST',
@@ -24,7 +24,7 @@ export const sendEmail = async (formData, type, category = '') => {
     });
 
     const data = await response.json();
-    console.log('Server response:', data); // Add logging
+    console.log('Server response:', data);
 
     if (!response.ok) {
       throw new Error(data.error || 'Failed to send email');
