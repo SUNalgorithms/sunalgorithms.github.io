@@ -1,0 +1,130 @@
+.social-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(8px);
+}
+
+.social-modal {
+  background: linear-gradient(to bottom, #ffffff, #f8f9fa);
+  width: 90%;
+  max-width: 500px;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  animation: modalFadeIn 0.4s ease-out;
+}
+
+.social-modal-header {
+  background: linear-gradient(135deg, #156e2e, #45a049);
+  padding: 25px;
+  border-radius: 20px 20px 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.social-modal-content {
+  padding: 30px;
+}
+
+.social-modal-content h2 {
+  color: #156e2e;
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 30px;
+}
+
+.social-links-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  background: white;
+  border-radius: 15px;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.social-link:hover {
+  transform: translateY(-2px);
+  border-color: #45a049;
+  box-shadow: 0 5px 15px rgba(69, 160, 73, 0.2);
+}
+
+.social-icon {
+  font-size: 2.5rem;
+  margin-right: 20px;
+  width: 50px;
+  text-align: center;
+}
+
+.social-info {
+  flex: 1;
+}
+
+.social-info h3 {
+  margin: 0;
+  color: #156e2e;
+  font-size: 1.2rem;
+}
+
+.social-info p {
+  margin: 5px 0 0;
+  color: #666;
+}
+
+.close-button {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  position: absolute;
+  right: 25px;
+  top: 25px;
+}
+
+.close-button:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: rotate(90deg);
+}
+
+.modal-logo {
+  width: 60px;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+} 

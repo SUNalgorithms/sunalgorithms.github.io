@@ -1,0 +1,761 @@
+/* Reset default margins and padding */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+/* App Container */
+.app-container {
+  width: 100vw;  /* Full viewport width */
+  height: 100vh; /* Full viewport height */
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow-x: hidden;
+ /* background: linear-gradient(135deg, #f0f9e8 0%, #e8f6e3 100%);*/
+}
+
+.logo-container {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  text-align: left;
+  z-index: 2;
+}
+
+.logo-image {
+  max-width: 150px;
+  height: auto;
+  border-radius: 15px;
+  filter: drop-shadow(0 0 10px rgba(21, 110, 46, 0.3));
+  animation: float 6s ease-in-out infinite;
+  background: white;
+  padding: 10px;
+}
+
+.logo-container h2 {
+  color: #156e2e;
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+  margin-top: 10px;
+}
+
+.content-area {
+  margin-bottom: 100px; /* Space for toolbar */
+}
+
+/* Logo Section */
+.logo-section {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.tagline {
+  color: #156e2e;
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+  margin-top: 10px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  animation: glow 2s ease-in-out infinite alternate;
+  white-space: nowrap;
+}
+
+/* Animated Character */
+.character-container {
+  position: relative;
+  margin-top: 40px;
+  z-index: 1;
+}
+
+.character {
+  width: 100px;
+  height: 100px;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+.laptop {
+  width: 80px;
+  height: 60px;
+  background: #333;
+  border-radius: 8px;
+  position: relative;
+  transform: perspective(500px) rotateX(10deg);
+}
+
+.screen {
+  width: 70px;
+  height: 45px;
+  background: #222;
+  margin: 5px;
+  overflow: hidden;
+}
+
+.code-line {
+  height: 2px;
+  background: #4CAF50;
+  margin: 5px;
+  animation: typing 1s linear infinite;
+}
+
+/* Falling Letters */
+.falling-words-container {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.falling-letter {
+  position: absolute;
+  color: #156e2e;
+  font-size: 2rem;
+  font-weight: bold;
+  opacity: 0;
+  animation: fallDown 3s linear infinite;
+}
+
+/* Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes glow {
+  from { text-shadow: 0 0 5px #156e2e, 0 0 10px #156e2e; }
+  to { text-shadow: 0 0 20px #156e2e, 0 0 30px #156e2e; }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+@keyframes typing {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes fallDown {
+  0% {
+    transform: translateY(-100vh) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .logo-image {
+    max-width: 150px;
+  }
+  
+  .tagline {
+    font-size: 1rem;
+  }
+  
+  .falling-letter {
+    font-size: 1.5rem;
+  }
+}
+
+/* Additional Effects */
+.animate-fade-in {
+  animation: fadeIn 1s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Pulse Effect */
+.pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.about-section {
+  margin-top: 150px;
+  text-align: center;
+  padding: 20px;
+}
+
+.landing-text {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+  height: 50px;
+}
+
+.landing-letter {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #156e2e;
+  margin: 0 5px;
+  opacity: 0;
+  transform: translateY(-100vh);
+  animation: landAndArrange 3s forwards;
+}
+
+.about-description {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s forwards;
+  line-height: 1.8;
+  color: #333;
+  font-size: 1.1rem;
+  text-align: justify;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes landAndArrange {
+  0% {
+    transform: translateY(-100vh) rotate(0deg);
+    opacity: 0;
+  }
+  60% {
+    transform: translateY(20px) rotate(360deg);
+    opacity: 1;
+  }
+  80% {
+    transform: translateY(-10px) rotate(360deg);
+  }
+  100% {
+    transform: translateY(0) rotate(360deg);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .landing-letter {
+    font-size: 2rem;
+  }
+
+  .about-description {
+    font-size: 1rem;
+    padding: 15px;
+  }
+}
+
+/* Add to your existing CSS */
+.placeholder-frame {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.7);
+  min-height: 300px;
+}
+
+.placeholder-content {
+  text-align: center;
+  color: #156e2e;
+  font-style: italic;
+}
+
+/* Optional: Add a subtle pulse animation to the placeholder */
+.placeholder-frame {
+  animation: placeholderPulse 2s infinite;
+}
+
+@keyframes placeholderPulse {
+  0% { background: rgba(255, 255, 255, 0.7); }
+  50% { background: rgba(21, 110, 46, 0.1); }
+  100% { background: rgba(255, 255, 255, 0.7); }
+}
+
+/* Frames Container */
+.frames-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+  padding: 20px;
+  width: 90%;
+  max-width: 1400px;
+  margin: 80px auto 0;
+}
+
+/* Frame Styles */
+.frame {
+  background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 15px;
+  padding: 20px;
+  height: 350px; /* Fixed height for all frames */
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  position: relative; /* For proper scrolling */
+  color: #333;
+  min-height: 300px;
+}
+
+/* About frame specific styles */
+.about-frame {
+  display: flex;
+  flex-direction: column;
+}
+
+.about-frame h2 {
+  color: #333;
+  margin-bottom: 15px;
+  position: sticky; /* Keep title visible */
+  top: 0;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 10px 0;
+  z-index: 1;
+}
+
+/* Scrollable content container */
+.about-description {
+  color: #333;
+  line-height: 1.6;
+  overflow-y: auto; /* Enable vertical scrolling */
+  padding-right: 10px; /* Space for scrollbar */
+  flex-grow: 1; /* Take remaining space */
+}
+
+/* Customize scrollbar */
+.about-description::-webkit-scrollbar {
+  width: 6px;
+}
+
+.about-description::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+
+.about-description::-webkit-scrollbar-thumb {
+  background: rgba(51, 51, 51, 0.5);
+  border-radius: 3px;
+}
+
+.about-description::-webkit-scrollbar-thumb:hover {
+  background: rgba(51, 51, 51, 0.7);
+}
+
+/* Slideshow Frame */
+.slideshow-frame {
+  display: flex;
+  flex-direction: column;
+  height: 350px;
+  overflow: hidden; /* Ensure nothing spills out */
+  padding: 20px;
+}
+
+/* Title */
+.slideshow-frame h3 {
+  margin-bottom: 15px;
+  color: #333;
+  flex-shrink: 0; /* Prevent title from shrinking */
+}
+
+/* Image container */
+.slideshow {
+  width: 100%;
+  height: 150px; /* Fixed height for top half */
+  flex-shrink: 0; /* Prevent shrinking */
+  overflow: hidden;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.slideshow-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block; /* Remove any extra space */
+}
+
+/* Description container */
+.frame-description-container {
+  flex: 1; /* Take remaining space */
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  overflow: hidden; /* Ensure content doesn't spill */
+  margin-top: auto; /* Push to bottom if space available */
+}
+
+.frame-description-scroll {
+  height: 100%;
+  overflow-y: auto;
+  padding: 15px;
+}
+
+.frame-description {
+  color: #333;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Scrollbar styling */
+.frame-description-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.frame-description-scroll::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+
+.frame-description-scroll::-webkit-scrollbar-thumb {
+  background: rgba(51, 51, 51, 0.5);
+  border-radius: 3px;
+}
+
+/* Frame Headers */
+.frame h2, .frame h3 {
+  color: #333;
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+  text-align: center;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.frame h2::after, .frame h3::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 3px;
+  background: linear-gradient(90deg, #156e2e, #45a049);
+  border-radius: 2px;
+}
+
+/* Placeholder Frame */
+.placeholder-frame {
+  height: 350px;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .frames-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .frames-container {
+    grid-template-columns: 1fr;
+    width: 95%;
+    margin-top: 60px;
+  }
+
+  .frame {
+    min-height: 250px;
+  }
+
+  .logo-image {
+    max-width: 120px;
+  }
+}
+
+/* Optional: Add hover effect */
+.frame:hover {
+  background: rgba(255, 255, 255, 0.2) !important;
+  transform: translateY(-5px);
+}
+
+/* Slideshow Animation */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: scale(1.1);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.slideshow-image {
+  animation: slideIn 0.5s ease forwards;
+}
+
+/* Loading Animation */
+@keyframes shimmer {
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+}
+
+.loading {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite linear;
+}
+
+/* Add smooth scrolling to the whole page */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Add a subtle background pattern */
+
+
+/* Add loading state */
+.frame.loading::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  animation: shimmer 2s infinite;
+}
+
+/* Animated Background */
+.animated-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: linear-gradient(45deg, #1a2634 0%, #203a43 50%, #2c5364 100%);
+  overflow: hidden;
+}
+
+.stars {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  animation: rotate 200s linear infinite;
+  background-image: 
+    radial-gradient(2px 2px at 20px 30px, #fff, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 40px 70px, #fff, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 50px 160px, #fff, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 90px 40px, #fff, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 130px 80px, #fff, rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 160px 120px, #fff, rgba(0,0,0,0));
+  background-repeat: repeat;
+  background-size: 200px 200px;
+}
+
+@keyframes rotate {
+  from {
+    transform: translateY(0) rotate(0deg);
+  }
+  to {
+    transform: translateY(-100%) rotate(360deg);
+  }
+}
+
+/* Add floating planets */
+.planet {
+  position: absolute;
+  border-radius: 50%;
+  box-shadow: inset -25px -25px 40px rgba(0,0,0,.5);
+  background-image: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+  animation: float-planet 20s infinite linear;
+}
+
+.planet:nth-child(1) {
+  width: 60px;
+  height: 60px;
+  top: 10%;
+  left: 5%;
+  background-image: linear-gradient(45deg, #ffd93d, #ff8e8e);
+  animation-duration: 25s;
+}
+
+.planet:nth-child(2) {
+  width: 40px;
+  height: 40px;
+  top: 50%;
+  left: 85%;
+  background-image: linear-gradient(45deg, #6c5ce7, #a8a4e6);
+  animation-duration: 30s;
+}
+
+.planet:nth-child(3) {
+  width: 80px;
+  height: 80px;
+  top: 80%;
+  left: 25%;
+  background-image: linear-gradient(45deg, #00cec9, #81ecec);
+  animation-duration: 35s;
+}
+
+/* Nebula effect */
+.nebula {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 50% 50%, 
+    rgba(76, 0, 255, 0.1) 0%,
+    rgba(76, 0, 255, 0) 70%);
+  animation: pulse-nebula 8s infinite ease-in-out;
+}
+
+/* Animations */
+@keyframes float-planet {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate(20px, -20px) rotate(180deg);
+  }
+  100% {
+    transform: translate(0, 0) rotate(360deg);
+  }
+}
+
+@keyframes pulse-nebula {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.2);
+  }
+}
+
+/* Shooting stars */
+.shooting-star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: white;
+  animation: shooting 5s infinite linear;
+}
+
+.shooting-star::before {
+  content: '';
+  position: absolute;
+  width: 100px;
+  height: 1px;
+  background: linear-gradient(90deg, white, transparent);
+  transform: translateX(-100%);
+}
+
+@keyframes shooting {
+  0% {
+    transform: translateX(-100%) translateY(0);
+  }
+  100% {
+    transform: translateX(200vw) translateY(100vh);
+  }
+}
+
+.frame p {
+  color: #333;
+}
+
+.frame h3 {
+  color: #333;
+  margin-bottom: 15px;
+  font-size: 1.4rem;
+  text-align: center;
+}
+
+.frame-description {
+  color: #333;
+  padding: 15px;
+  text-align: center;
+  line-height: 1.6;
+  margin-top: 10px;
+}
+
+.slideshow-frame {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.slideshow {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 8px;
+  margin: 10px 0;
+}
+
+.slideshow-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.5s ease;
+}
+
+.frame-description-container {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 15px;
+  margin-top: 10px;
+  border-radius: 8px;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.frame-description {
+  color: #333;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  text-align: center;
+  margin: 0;
+  text-shadow: none;
+}
+
+/* Optional hover effect */
+.frame-description-container:hover {
+  background: rgba(255, 255, 255, 0.95);
+  transform: translateY(-2px);
+  transition: all 0.3s ease;
+}
