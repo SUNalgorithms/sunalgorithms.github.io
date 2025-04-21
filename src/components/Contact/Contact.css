@@ -1,0 +1,41 @@
+.contact-content {
+  padding: 20px;
+  margin-top: 80px;
+  margin-bottom: 80px;
+}
+
+.contact-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.contact-info {
+  display: grid;
+  gap: 20px;
+}
+
+.contact-item {
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.contact-item:hover {
+  transform: translateY(-2px);
+}
+
+.contact-item h3 {
+  color: #4ecdc4;
+  margin-bottom: 8px;
+}
+
+.contact-item p {
+  color: rgba(255, 255, 255, 0.9);
+} 

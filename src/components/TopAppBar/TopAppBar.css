@@ -1,0 +1,162 @@
+.top-app-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.8),
+    rgba(128, 0, 128, 0.4)
+  );
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  z-index: 1000;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-image {
+  height: 40px;
+  width: 40px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+.logo-text {
+  display: flex;
+  gap: 4px;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.sun {
+  background: linear-gradient(45deg, #ff6b6b, #ffd93d);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 10px rgba(255, 107, 107, 0.3);
+}
+
+.algorithms {
+  background: linear-gradient(45deg, #4ecdc4, #6c5ce7);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 10px rgba(108, 92, 231, 0.3);
+}
+
+.menu-button {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #fff;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  margin-left: auto; /* Pushes button to the right */
+}
+
+.menu-icon {
+  font-size: 20px;
+  color: #fff;
+}
+
+.menu-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+}
+
+.menu-overlay {
+  position: fixed;
+  top: 64px;
+  right: 0;
+  width: 250px;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.9),
+    rgba(128, 0, 128, 0.8)
+  );
+  backdrop-filter: blur(15px);
+  border-radius: 0 0 0 12px;
+  padding: 16px;
+  box-shadow: -5px 5px 15px rgba(0, 0, 0, 0.3);
+  animation: slideIn 0.3s ease;
+}
+
+.menu-items {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.menu-items button {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #fff;
+  padding: 12px 16px;
+  text-align: left;
+  font-size: 1.1rem;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.menu-items button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateX(5px);
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .logo-image {
+    display: none;
+  }
+  
+  .logo-text {
+    font-size: 1.2rem;
+  }
+}
+
+.escape-button {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  margin-left: auto; /* This will push it to the right */
+  backdrop-filter: blur(5px);
+}
+
+.escape-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+} 

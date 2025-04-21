@@ -759,3 +759,183 @@ html {
   transform: translateY(-2px);
   transition: all 0.3s ease;
 }
+
+.gallery-grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  margin-top: 80px;
+  margin-bottom: 80px;
+}
+
+.gallery-section {
+  background: rgba(255, 255, 255, 0.1);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  height: fit-content;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Slideshow container and image sizing */
+.slideshow-container {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  padding: 8px;
+  overflow: hidden;
+}
+
+.slides {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  height: 160px;
+  width: 100%;
+}
+
+.slide {
+  min-width: 100%;
+  height: 100%;
+  padding: 2px;
+  flex-shrink: 0;
+}
+
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .gallery-grid-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding: 16px;
+  }
+
+  .slides {
+    height: 140px;
+  }
+}
+
+@media (max-width: 768px) {
+  .gallery-grid-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    padding: 16px;
+    margin-top: 70px;
+    margin-bottom: 70px;
+  }
+
+  .gallery-section {
+    padding: 12px;
+  }
+
+  .slides {
+    height: 120px;
+  }
+}
+
+@media (max-width: 480px) {
+  .gallery-grid-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    padding: 12px;
+  }
+
+  .gallery-section {
+    padding: 10px;
+  }
+
+  .slides {
+    height: 100px;
+  }
+
+  .gallery-section h2 {
+    font-size: 1rem;
+    margin-bottom: 10px;
+  }
+}
+
+/* Add these new styles while keeping your existing ones */
+
+.form-container,
+.about-container,
+.contact-container {
+  max-width: 800px;
+  margin: 100px auto;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: white;
+  font-size: 16px;
+}
+
+.form-group textarea {
+  height: 120px;
+  resize: vertical;
+}
+
+.submit-btn {
+  background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+}
+
+h2 {
+  color: white;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.contact-info p {
+  color: white;
+  margin: 10px 0;
+  text-align: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .form-container,
+  .about-container,
+  .contact-container {
+    margin: 80px 20px;
+    padding: 16px;
+  }
+}

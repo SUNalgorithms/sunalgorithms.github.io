@@ -20,24 +20,34 @@ const HiringForm = ({ isOpen, onClose }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsSubmitting(true);
-
     try {
-      const success = await sendEmail(formData, 'hiring');
-      
-      if (success) {
-        setSubmitStatus('success');
-        setTimeout(() => {
-          onClose();
-          setSubmitStatus(null);
-        }, 3000);
+      const formData = {
+        firstName: e.target.firstName.value,
+        surname: e.target.surname.value,
+        email: e.target.email.value,
+        phone: e.target.phone.value,
+        residence: e.target.residence.value,
+        address: e.target.address.value
+      };
+
+      const response = await fetch('https://sunalgorithms-backend.onrender.com/api/applications', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+      });
+
+      if (response.ok) {
+        alert('Application submitted successfully!');
+        onClose();
+        // Form will be sent to your backend email
       } else {
-        setSubmitStatus('error');
+        throw new Error('Failed to submit application');
       }
     } catch (error) {
-      setSubmitStatus('error');
-    } finally {
-      setIsSubmitting(false);
+      console.error('Error:', error);
+      alert('Failed to submit application. Please try again.');
     }
   };
 

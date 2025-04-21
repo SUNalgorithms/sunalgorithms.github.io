@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import './App.css'
 import Toolbar from './components/Toolbar/Toolbar'
 import logoImage from './assets/logo.jpeg'
@@ -6,6 +6,8 @@ import HiringForm from './components/HiringForm/HiringForm'
 import CategorySelect from './components/CategorySelect/CategorySelect'
 import QueryForm from './components/QueryForm/QueryForm'
 import SocialMediaModal from './components/SocialMediaModal/SocialMediaModal'
+import TopAppBar from './components/TopAppBar/TopAppBar'
+import Loader from './components/Loader/Loader'
 
 function App() {
   const [activeTab, setActiveTab] = useState(0)
@@ -22,17 +24,43 @@ function App() {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [showQueryForm, setShowQueryForm] = useState(false);
   const [showSocialModal, setShowSocialModal] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [currentImageIndex, setCurrentImageIndex] = useState({
+    programmers: 0,
+    team: 0
+  });
 
   // Alternative way to reference images
-  const imagesFolders = {
+  const images = {
     programmers: [
       '/programmers/image1.jpg',
       '/programmers/image2.jpg',
       '/programmers/image3.webp'
     ],
-    team: ['/team/team1.jpeg'],
-    other: []
-  }
+    team: [
+      '/team/team1.jpeg'
+    ]
+  };
+
+  // Add loading state for images
+  const [loadedImages, setLoadedImages] = useState({
+    programmers: new Array(images.programmers.length).fill(false),
+    team: new Array(images.team.length).fill(false)
+  });
+
+  const handleImageLoad = (section, index) => {
+    setLoadedImages(prev => ({
+      ...prev,
+      [section]: prev[section].map((loaded, i) => 
+        i === index ? true : loaded
+      )
+    }));
+  };
+
+  const handleImageError = (e, section, index) => {
+    console.warn(`Failed to load image: ${e.target.src}`);
+    handleImageLoad(section, index); // Mark as loaded even if error
+  };
 
   // Add this function to verify paths
   const verifyImageExists = (path) => {
@@ -45,13 +73,13 @@ function App() {
   // Slideshow Effect
   useEffect(() => {
     // Verify all images
-    imagesFolders.programmers.forEach(verifyImageExists);
-    imagesFolders.team.forEach(verifyImageExists);
+    images.programmers.forEach(verifyImageExists);
+    images.team.forEach(verifyImageExists);
 
     const interval = setInterval(() => {
       setCurrentImages(prev => {
         const next = {
-          programmers: (prev.programmers + 1) % imagesFolders.programmers.length,
+          programmers: (prev.programmers + 1) % images.programmers.length,
           algorithms: 0,
           team: 0,
           other: 0
@@ -68,6 +96,21 @@ function App() {
     // Simulate loading time
     const timer = setTimeout(() => setIsLoading(false), 1000);
     return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    setTimeout(() => setLoading(false), 1500);
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex(prev => ({
+        programmers: (prev.programmers + 1) % images.programmers.length,
+        team: prev.team
+      }));
+    }, 4000);
+
+    return () => clearInterval(interval);
   }, []);
 
   // Add this function to handle tab clicks
@@ -96,125 +139,128 @@ function App() {
     { id: 3, label: 'Contact', icon: '📧' }
   ];
 
-
-  return (
-    <>
-      <div className="animated-background">
-        <div className="stars"></div>
-        <div className="nebula"></div>
-        <div className="planet"></div>
-        <div className="planet"></div>
-        <div className="planet"></div>
-        <div className="shooting-star" style={{top: '20%', left: '10%'}}></div>
-        <div className="shooting-star" style={{top: '50%', left: '30%', animationDelay: '2s'}}></div>
-        <div className="shooting-star" style={{top: '70%', left: '60%', animationDelay: '4s'}}></div>
-      </div>
-      <div className="app-container">
-        <div className="logo-section">
-          <div className="logo-container animate-fade-in">
-            <img src={logoImage} alt="SUNalgorithms" className="logo-image pulse" />
-          </div>
-
-          <div className="frames-container">
-            {/* About Frame */}
-            <div className="frame about-frame">
-              <h2>About Us</h2>
-              <p className="about-description">
-                Welcome to SUNalgorithms, where innovation meets efficiency. 
-                We specialize in crafting elegant solutions through advanced 
-                algorithms and cutting-edge technology. Our mission is to 
-                illuminate the path to better software solutions, making complex 
-                problems simple and accessible. From optimization to machine 
-                learning, we transform challenges into opportunities, helping 
-                businesses and developers shine in the digital landscape.
-                {/* Add more content here - it will be scrollable */}
-              </p>
-            </div>
-
-            {/* Programmers Frame */}
-            <div className={`frame slideshow-frame ${isLoading ? 'loading' : ''}`}>
-              <h3>Learn Futuristic Algorithms</h3>
-              
-              <div className="slideshow">
-                <img 
-                  key={currentImages.programmers} 
-                  src={imagesFolders.programmers[currentImages.programmers]} 
-                  alt={`Programming ${currentImages.programmers + 1}`}
-                  className="slideshow-image"
-                />
+  const renderContent = () => {
+    switch (activeTab) {
+      case 0:
+        return (
+          <div className="home-content">
+            <div className="gallery-grid-container">
+              <div className="gallery-section programmers">
+                <h2>Programmers</h2>
+                <div className="slideshow-container">
+                  <div className="slides" style={{
+                    transform: `translateX(-${currentImageIndex.programmers * 100}%)`
+                  }}>
+                    {images.programmers.map((img, index) => (
+                      <div key={index} className="slide">
+                        <img src={img} alt={`Programmer ${index + 1}`} />
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
-              
-              <div className="frame-description-container">
-                <div className="frame-description-scroll">
-                  <p className="frame-description">
-                    Master advanced programming and cutting-edge algorithms in AI, 
-                    Machine Learning, Quantum Computing, and Blockchain technology. 
-                    Transform your coding journey with our innovative solutions.
-                    
-                    Our comprehensive curriculum covers:
-                    • Advanced Algorithm Design
-                    • Machine Learning Implementation
-                    • Neural Network Architecture
-                    • Quantum Computing Basics
-                    • Blockchain Development
-                    • Data Structure Optimization
-                    • Real-world Application Development
-                  </p>
+
+              <div className="gallery-section team">
+                <h2>Team</h2>
+                <div className="slideshow-container">
+                  <div className="slide">
+                    <img src={images.team[0]} alt="Team" />
+                  </div>
+                </div>
+              </div>
+
+              <div className="gallery-section apis">
+                <h2>Our Services</h2>
+                <div className="api-container">
+                  <div className="api-card">
+                    <h3>GitHub API</h3>
+                    <p>Access repositories and development tools</p>
+                  </div>
+                  <div className="api-card">
+                    <h3>Stack Overflow API</h3>
+                    <p>Get developer solutions and resources</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="gallery-section ads">
+                <h2>Featured</h2>
+                <div className="ad-container">
+                  <div className="ad-space">
+                    <p>Advertisement Space</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="gallery-section others full-width">
+                <h2>Others</h2>
+                <div className="coming-soon">
+                  <h3>Coming Soon</h3>
+                  <p>Stay tuned for exciting updates!</p>
                 </div>
               </div>
             </div>
-
-            {/* Team Frame */}
-            <div className={`frame slideshow-frame ${isLoading ? 'loading' : ''}`}>
-              <h3>Our Team</h3>
-              <div className="slideshow">
-                <img 
-                  src={imagesFolders.team[0]} 
-                  alt="Team"
-                  className="slideshow-image"
-                  style={{ display: 'block' }}
-                />
-              </div>
-            </div>
-
-            {/* Other Frame (placeholder until you add images) */}
-            <div className="frame slideshow-frame placeholder-frame">
-              <h3>Coming Soon</h3>
-              <div className="placeholder-content">
-                <p>More content will be added soon!</p>
-              </div>
-            </div>
           </div>
-        </div>
+        );
+      case 2:
+        return (
+          <div className="services-content">
+            <h2>Our Services</h2>
+            {/* Services content */}
+          </div>
+        );
+      case 3:
+        return (
+          <div className="contact-content">
+            <h2>Contact Us</h2>
+            {/* Contact content */}
+          </div>
+        );
+      default:
+        return null;
+    }
+  };
 
-        <Toolbar 
-          activeTab={activeTab} 
-          setActiveTab={handleTabClick}
-        />
+  if (loading) return <Loader />;
 
-        <HiringForm 
-          isOpen={showHiringForm}
-          onClose={() => setShowHiringForm(false)}
-        />
+  return (
+    <div className="app">
+      <TopAppBar />
+      <div className="stars"></div>
+      <div className="twinkling"></div>
+      
+      <main className="main-content">
+        {renderContent()}
+      </main>
+      
+      <Toolbar 
+        activeTab={activeTab} 
+        setActiveTab={handleTabClick}
+        onHireClick={() => setShowHiringForm(true)}
+      />
 
-        <CategorySelect 
-          isOpen={showCategorySelect}
-          onClose={() => setShowCategorySelect(false)}
-          onSelect={handleCategorySelect}
-        />
-        
-        <QueryForm 
-          isOpen={showQueryForm}
-          onClose={() => setShowQueryForm(false)}
-          category={selectedCategory}
-        />
+      <HiringForm 
+        isOpen={showHiringForm}
+        onClose={() => setShowHiringForm(false)}
+      />
 
-        <SocialMediaModal 
-          isOpen={showSocialModal}
-          onClose={() => setShowSocialModal(false)}
-        />
-      </div>
-    </>
+      <CategorySelect 
+        isOpen={showCategorySelect}
+        onClose={() => setShowCategorySelect(false)}
+        onSelect={handleCategorySelect}
+      />
+      
+      <QueryForm 
+        isOpen={showQueryForm}
+        onClose={() => setShowQueryForm(false)}
+        category={selectedCategory}
+      />
+
+      <SocialMediaModal 
+        isOpen={showSocialModal}
+        onClose={() => setShowSocialModal(false)}
+      />
+    </div>
   )
 }
 

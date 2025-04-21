@@ -1,0 +1,41 @@
+.app-news-container {
+  display: flex;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  min-height: calc(100vh - 128px); /* Account for top and bottom bars */
+}
+
+.app-news-content {
+  flex: 1;
+  max-width: 680px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.app-news-sidebar {
+  width: 300px;
+  position: sticky;
+  top: 84px; /* TopAppBar height + 20px */
+  height: fit-content;
+  display: none; /* Hidden on mobile */
+}
+
+.sponsored-content,
+.api-showcase {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+/* Responsive design */
+@media (min-width: 1024px) {
+  .app-news-sidebar {
+    display: block;
+  }
+} 

@@ -1,12 +1,13 @@
-import { useState } from 'react'
+import React from 'react'
 import './Toolbar.css'
 
-const Toolbar = ({ activeTab, setActiveTab }) => {
+const Toolbar = ({ activeTab, setActiveTab, onHireClick }) => {
   const tabs = [
     { id: 0, label: 'Home', icon: '🏠' },
     { id: 1, label: 'Get Hired', icon: '💼' },
-    { id: 2, label: 'Develop With Us', icon: '🚀' },
-    { id: 3, label: 'Contact', icon: '📧' }
+    { id: 2, label: 'Our Services', icon: '⚙️' },
+    { id: 3, label: 'Contact', icon: '📧' },
+    { id: 4, label: 'About Us', icon: 'ℹ️' }
   ]
 
   return (

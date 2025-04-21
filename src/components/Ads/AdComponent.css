@@ -1,0 +1,24 @@
+.ad-container {
+  padding: 12px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  margin-bottom: 12px;
+  transition: transform 0.2s;
+}
+
+.ad-container:hover {
+  transform: translateY(-2px);
+}
+
+.sponsored-label {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.6);
+  display: block;
+  margin-bottom: 8px;
+}
+
+.ad-image {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 8px;
+} 
