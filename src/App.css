@@ -32,9 +32,10 @@ html, body {
   right: 0;
   bottom: 0;
   overflow-x: hidden;
- /* background: linear-gradient(135deg, #f0f9e8 0%, #e8f6e3 100%);*/
+  /* background: linear-gradient(135deg, #f0f9e8 0%, #e8f6e3 100%);*/
 }
 
+/* Logo Container */
 .logo-container {
   position: absolute;
   top: 20px;
@@ -60,6 +61,7 @@ html, body {
   margin-top: 10px;
 }
 
+/* Content Area */
 .content-area {
   margin-bottom: 100px; /* Space for toolbar */
 }
@@ -207,6 +209,7 @@ html, body {
   50% { transform: scale(1.05); }
 }
 
+/* About Section */
 .about-section {
   margin-top: 150px;
   text-align: center;
@@ -272,6 +275,103 @@ html, body {
     transform: translateY(0);
   }
 }
+
+/* ---------------------------------------- */
+/* Additional CSS for Gallery Sections and Ad Container */
+/* ---------------------------------------- */
+
+/* Gallery Grid Container */
+/* Gallery Grid Container */
+.gallery-grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  margin: 20px 0;
+}
+
+/* Gallery Section - forces equal sizing */
+.gallery-section {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  min-height: 350px; /* Adjust this value as needed for consistency */
+  
+  /* These flex settings ensure that the content (heading, images, etc.)
+     is spaced evenly within the container */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Gallery Section Heading - restored to white */
+.gallery-section h2 {
+  margin-bottom: 15px;
+  font-size: 1.5em;
+  color: #fff;  /* Your original heading color */
+  text-align: center;
+}
+/* Additional CSS for the Featured Ad Section */
+
+/* Ensure the ad container retains a minimum height */
+.gallery-section.ads .ad-container {
+  min-height: 250px;  /* Adjust this value as needed */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Ensure the AdSense element inside the ad container also gets a minimum height */
+.gallery-section.ads .ad-container .adsbygoogle {
+  min-height: 250px;
+  width: 100%;
+  display: block;
+}
+
+
+
+/* Slideshow Container */
+.slideshow-container {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+/* Slides Container */
+.slides {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+/* Single Slide */
+.slide {
+  min-width: 100%;
+}
+
+/* Slideshow Images */
+.slideshow-container img {
+  width: 100%;
+  display: block;
+  border-radius: 5px;
+}
+
+/* AdSense Ad Container Styling */
+.ad-container {
+  margin: 15px auto;
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fafafa;
+}
+
+/* Ensure the AdSense ad block conforms to the layout */
+.adsbygoogle {
+  display: block;
+  width: 100%;
+}
+
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
