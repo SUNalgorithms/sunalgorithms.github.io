@@ -276,19 +276,17 @@ html, body {
   }
 }
 
-/* ---------------------------------------- */
-/* Additional CSS for Gallery Sections and Ad Container */
-/* ---------------------------------------- */
 
-/* Gallery Grid Container */
-/* Gallery Grid Container */
 .gallery-grid-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
   padding: 20px;
-  margin: 20px 0;
+  max-width: 1200px;
+  margin: 0 auto;
+  margin-top: 100px; /* Moves the gallery down */
 }
+
 
 /* Gallery Section - forces equal sizing */
 .gallery-section {
@@ -308,27 +306,56 @@ html, body {
 /* Gallery Section Heading - restored to white */
 .gallery-section h2 {
   margin-bottom: 15px;
+  margin-top: 10px;
   font-size: 1.5em;
   color: #fff;  /* Your original heading color */
   text-align: center;
 }
-/* Additional CSS for the Featured Ad Section */
+.gallery-section.apis,
+.gallery-section.others {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Ensures content starts at the top */
+  align-items: center;
+  height: 350px; /* Keeps frames equal */
+  padding-top: 10px; /* Reduces unnecessary spacing */
+}
 
-/* Ensure the ad container retains a minimum height */
-.gallery-section.ads .ad-container {
-  min-height: 250px;  /* Adjust this value as needed */
+.gallery-section.programmers {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 350px; /* Limit height so all frames stay equal */
+}
+
+.programmers .slideshow-container {
+  width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* Ensure the AdSense element inside the ad container also gets a minimum height */
-.gallery-section.ads .ad-container .adsbygoogle {
-  min-height: 250px;
+.programmers .slides {
+  display: flex;
   width: 100%;
-  display: block;
+  height: 100%;
 }
 
+.programmers .slide {
+  flex: 1; /* Ensure equal spacing */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.programmers .slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Prevent stretching */
+  border-radius: 6px;
+}
 
 
 /* Slideshow Container */
@@ -356,23 +383,6 @@ html, body {
   border-radius: 5px;
 }
 
-/* AdSense Ad Container Styling */
-.ad-container {
-  margin: 15px auto;
-  padding: 10px;
-  text-align: center;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background-color: #fafafa;
-}
-
-/* Ensure the AdSense ad block conforms to the layout */
-.adsbygoogle {
-  display: block;
-  width: 100%;
-}
-
-
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .landing-letter {
@@ -382,6 +392,19 @@ html, body {
   .about-description {
     font-size: 1rem;
     padding: 15px;
+  }
+  .gallery-grid-container {
+    grid-template-columns: 1fr;
+    width: 95%;
+  }
+
+  .gallery-section {
+    padding: 16px;
+  }
+
+  .slideshow-container img {
+    width: 100%;
+    height: auto;
   }
 }
 

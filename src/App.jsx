@@ -103,21 +103,6 @@ function App() {
     return () => clearInterval(interval);
   }, []);
 
-  // Load the AdSense script dynamically
-  useEffect(() => {
-    const script = document.createElement('script');
-    script.src =
-      'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js';
-    script.async = true;
-    script.setAttribute('data-ad-client', 'ca-pub-7147971204711316');
-    document.body.appendChild(script);
-  }, []);
-
-  // Initialize adsbygoogle once the ad container is mounted
-  useEffect(() => {
-    window.adsbygoogle = window.adsbygoogle || [];
-    window.adsbygoogle.push({});
-  }, []);
 
   const handleTabClick = (tabId) => {
     setActiveTab(tabId);
@@ -206,19 +191,7 @@ function App() {
               </div>
 
               {/* Featured Ads Section */}
-              <div className="gallery-section ads">
-                <h2>Featured</h2>
-                <div className="ad-container">
-                  <ins
-                    className="adsbygoogle"
-                    style={{ display: 'block' }}
-                    data-ad-client="ca-pub-7147971204711316"
-                    data-ad-slot="1234567890" // Replace with your actual ad slot ID
-                    data-ad-format="auto"
-                    data-full-width-responsive="true"
-                  ></ins>
-                </div>
-              </div>
+              
 
               {/* Others Section */}
               <div className="gallery-section others full-width">
