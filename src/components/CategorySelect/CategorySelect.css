@@ -19,16 +19,20 @@
   border-radius: 20px;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
   animation: modalFadeIn 0.4s ease-out;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
 }
 
 .category-modal-header {
-  background: linear-gradient(135deg, #156e2e, #45a049);
-  padding: 25px;
-  border-radius: 20px 20px 0 0;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: flex-start;
+  gap: 18px;
   position: relative;
+  padding: 25px;
+  background: linear-gradient(135deg, #156e2e, #45a049);
+  border-radius: 20px 20px 0 0;
 }
 
 .category-content {
@@ -212,10 +216,78 @@
   transform: rotate(90deg);
 }
 
+.close-button.styled-header-btn {
+  background: rgba(255,255,255,0.15);
+  border: none;
+  color: #222;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  padding: 8px 18px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  font-weight: 500;
+  outline: none;
+  margin-left: auto;
+  position: static;
+}
+
+.close-button.styled-header-btn:hover {
+  background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+  color: #fff;
+}
+
 /* Add styles for the modal logo */
 .modal-logo {
-  width: 60px;
-  height: auto;
+  width: 44px;
+  height: 44px;
   border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-} 
+  object-fit: cover;
+  margin-right: 16px;
+}
+
+.category-header-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+  color: #fff;
+  flex: 1;
+  text-align: left;
+  letter-spacing: 0.5px;
+}
+
+@media (max-width: 600px) {
+  .category-modal {
+    width: 98vw;
+    max-width: 100vw;
+    min-width: 0;
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
+    max-height: 100vh;
+  }
+
+  .category-modal-header {
+    padding: 14px 10px;
+    border-radius: 0;
+    gap: 10px;
+  }
+
+  .modal-logo {
+    width: 32px;
+    height: 32px;
+    margin-right: 8px;
+  }
+
+  .category-header-title {
+    font-size: 1.1rem;
+  }
+
+  .category-content {
+    padding: 10px;
+  }
+
+  .category-content h2 {
+    font-size: 1.2rem;
+  }
+}

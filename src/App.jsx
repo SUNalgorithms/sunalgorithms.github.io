@@ -18,6 +18,22 @@ function App() {
   const [showSocialModal, setShowSocialModal] = useState(false);
   const [loading, setLoading] = useState(true);
 
+  // For step control in HiringForm
+  const [hiringStep, setHiringStep] = useState(0); // 0 = path select, 1 = form
+
+  const openHiringForm = () => {
+    setShowHiringForm(true);
+    setHiringStep(0);
+  };
+
+  const closeHiringForm = () => {
+    setShowHiringForm(false);
+    setActiveTab(0); // Go to home
+  };
+
+  const goToHiringForm = () => setHiringStep(1);
+  const goToPathSelect = () => setHiringStep(0);
+
   // Other state values for image slideshows etc.
   const [currentImages, setCurrentImages] = useState({
     programmers: 0,
@@ -121,6 +137,11 @@ function App() {
     setShowQueryForm(true);
   };
 
+  const handleBackToCategory = () => {
+    setShowQueryForm(false);
+    setShowCategorySelect(true);
+  };
+
   const tabs = [
     { id: 0, label: 'Home', icon: '🏠' },
     { id: 1, label: 'Get Hired', icon: '💼' },
@@ -174,31 +195,56 @@ function App() {
                   </div>
                 </div>
               </div>
+            </div>
 
-              {/* Our Services Section */}
-              <div className="gallery-section apis">
-                <h2>Our Services</h2>
-                <div className="api-container">
-                  <div className="api-card">
-                    <h3>GitHub API</h3>
-                    <p>Access repositories and development tools</p>
-                  </div>
-                  <div className="api-card">
-                    <h3>Stack Overflow API</h3>
-                    <p>Get developer solutions and resources</p>
-                  </div>
-                </div>
+            {/* Hero Section */}
+            <div className="hero-section">
+              <h1>Empowering Your Tech Journey</h1>
+              <p>
+                Expert solutions in programming, design, and tech support for students, professionals, and innovators.
+              </p>
+              <button className="cta-btn">Get Started</button>
+            </div>
+
+            {/* Features Row */}
+            <div className="features-row">
+              <div className="feature-card">
+                <span className="feature-icon">🤖</span>
+                <h3>Tech Help</h3>
+                <p>Get instant support for your programming and tech challenges.</p>
               </div>
+              <div className="feature-card">
+                <span className="feature-icon">💼</span>
+                <h3>Get Hired</h3>
+                <p>Apply for opportunities and join our talented team.</p>
+              </div>
+              <div className="feature-card">
+                <span className="feature-icon">🚀</span>
+                <h3>Project Support</h3>
+                <p>Bring your ideas to life with expert guidance and collaboration.</p>
+              </div>
+              <div className="feature-card">
+                <span className="feature-icon">🌟</span>
+                <h3>Community</h3>
+                <p>Connect, learn, and grow with like-minded innovators.</p>
+              </div>
+            </div>
 
-              {/* Featured Ads Section */}
-              
-
-              {/* Others Section */}
-              <div className="gallery-section others full-width">
-                <h2>Others</h2>
-                <div className="coming-soon">
-                  <h3>Coming Soon</h3>
-                  <p>Stay tuned for exciting updates!</p>
+            {/* Testimonials Section */}
+            <div className="testimonials-section">
+              <h2>What Our Users Say</h2>
+              <div className="testimonial-slider">
+                <div className="testimonial-card">
+                  <p>"SUNalgorithms helped me solve a tough coding bug in minutes!"</p>
+                  <span>- Alex, Student</span>
+                </div>
+                <div className="testimonial-card">
+                  <p>"Their team support made my project launch a breeze."</p>
+                  <span>- Priya, Developer</span>
+                </div>
+                <div className="testimonial-card">
+                  <p>"I landed my first tech job through their Get Hired program!"</p>
+                  <span>- Sam, Graduate</span>
                 </div>
               </div>
             </div>
@@ -236,15 +282,25 @@ function App() {
         setActiveTab={handleTabClick}
         onHireClick={() => setShowHiringForm(true)}
       />
-      <HiringForm isOpen={showHiringForm} onClose={() => setShowHiringForm(false)} />
+      <HiringForm
+        isOpen={showHiringForm}
+        step={hiringStep}
+        onClose={closeHiringForm}
+        onBack={goToPathSelect}
+        onPathChosen={goToHiringForm}
+      />
       <CategorySelect
         isOpen={showCategorySelect}
-        onClose={() => setShowCategorySelect(false)}
+        onClose={() => {
+          setShowCategorySelect(false);
+          setActiveTab(0); // Go to Home
+        }}
         onSelect={handleCategorySelect}
       />
       <QueryForm
         isOpen={showQueryForm}
         onClose={() => setShowQueryForm(false)}
+        onBack={handleBackToCategory}
         category={selectedCategory}
       />
       <SocialMediaModal

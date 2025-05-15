@@ -27,10 +27,29 @@
   padding: 20px;
   border-radius: 20px 20px 0 0;
   display: flex;
-  justify-content: space-between;
   align-items: center;
   color: white;
   position: relative;
+  justify-content: flex-start;
+  gap: 18px;
+}
+
+.modal-logo {
+  height: 44px;
+  width: 44px;
+  border-radius: 12px;
+  object-fit: cover;
+  margin-right: 12px;
+}
+
+.query-header-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+  flex: 1;
+  color: #fff;
+  letter-spacing: 0.5px;
+  text-align: left;
 }
 
 .query-modal-content {
@@ -164,4 +183,90 @@
 .close-button:hover {
   background: rgba(255, 255, 255, 0.3);
   transform: rotate(90deg);
-} 
+}
+
+.close-button.styled-header-btn {
+  background: rgba(255,255,255,0.15);
+  border: none;
+  color: #222;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  padding: 8px 18px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  font-weight: 500;
+  outline: none;
+  margin-left: auto;
+  margin-right: 0;
+  position: relative;
+  top: 0;
+  right: 0;
+}
+
+.close-button.styled-header-btn:hover {
+  background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+  color: #fff;
+}
+
+.back-button.styled-header-btn {
+  background: rgba(255,255,255,0.15);
+  border: none;
+  color: #222;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  padding: 8px 18px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  font-weight: 500;
+  outline: none;
+  margin-left: auto;
+  position: static;
+}
+
+.back-button.styled-header-btn:hover {
+  background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+  color: #fff;
+}
+
+@media (max-width: 600px) {
+  .query-modal {
+    width: 99vw;
+    max-width: 100vw;
+    min-width: 0;
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
+    max-height: 100vh;
+  }
+
+  .query-modal-header {
+    padding: 12px 8px;
+    border-radius: 0;
+    gap: 8px;
+  }
+
+  .modal-logo {
+    width: 32px;
+    height: 32px;
+    margin-right: 6px;
+  }
+
+  .query-header-title {
+    font-size: 1.1rem;
+  }
+
+  .query-modal-content {
+    padding: 8px;
+    max-height: calc(100vh - 60px);
+  }
+
+  .form-section {
+    padding: 10px;
+  }
+
+  .form-actions {
+    padding: 10px 0;
+  }
+}

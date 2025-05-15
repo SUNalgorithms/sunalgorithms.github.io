@@ -48,10 +48,11 @@ const CategorySelect = ({ isOpen, onClose, onSelect }) => {
       <div className="category-modal">
         <div className="category-modal-header">
           <img src={logoImage} alt="SUNalgorithms" className="modal-logo" />
-          <button 
-            className="close-button" 
-            onClick={handleClose}
-            type="button"
+          <h2 className="category-header-title">Select a Category</h2>
+          <button
+            className="close-button styled-header-btn"
+            onClick={onClose}
+            aria-label="Cancel"
           >
             ✕
           </button>
@@ -87,4 +88,4 @@ const CategorySelect = ({ isOpen, onClose, onSelect }) => {
   );
 };
 
-export default CategorySelect; 
+export default CategorySelect;

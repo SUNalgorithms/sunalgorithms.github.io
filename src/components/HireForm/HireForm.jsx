@@ -1,55 +1,62 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { sendEmail } from '../../utils/emailService';
 import './HireForm.css';
 
-const HireForm = () => {
+const HireForm = ({ isOpen, onClose }) => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: '',
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null);
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const formData = {
-        name: e.target.name.value,
-        email: e.target.email.value,
-        message: e.target.message.value,
-      };
-      
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/hire`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-      
-      if (response.ok) {
-        alert('Form submitted successfully!');
-        e.target.reset();
-      } else {
-        throw new Error('Failed to submit form');
-      }
-    } catch (error) {
-      console.error('Error:', error);
-      alert('Failed to submit form. Please try again.');
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+    const success = await sendEmail(formData, 'hire');
+    setIsSubmitting(false);
+    setSubmitStatus(success ? 'success' : 'error');
+    if (success) {
+      setTimeout(() => {
+        if (onClose) onClose();
+      }, 1500);
     }
   };
 
+  if (!isOpen) return null;
+
   return (
-    <div className="hire-content">
-      <div className="form-container">
-        <h2>Hire Developers</h2>
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <input type="text" name="name" placeholder="Your Name" required />
-          </div>
-          <div className="form-group">
-            <input type="email" name="email" placeholder="Your Email" required />
-          </div>
-          <div className="form-group">
-            <textarea name="message" placeholder="Project Description" required></textarea>
-          </div>
-          <button type="submit" className="submit-btn">Submit Request</button>
-        </form>
+    <div className="hire-modal-overlay">
+      <div className="hire-modal">
+        <div className="hire-modal-header">
+          <button className="close-button styled-header-btn" onClick={onClose}>✕</button>
+          <h2>Tech Help</h2>
+        </div>
+        <div className="form-container">
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <input name="name" value={formData.name} onChange={handleChange} placeholder="Your Name" required />
+            </div>
+            <div className="form-group">
+              <input name="email" value={formData.email} onChange={handleChange} placeholder="Your Email" required />
+            </div>
+            <div className="form-group">
+              <textarea name="message" value={formData.message} onChange={handleChange} placeholder="Describe your tech issue or question" required></textarea>
+            </div>
+            <button type="submit" className="submit-btn" disabled={isSubmitting}>Submit Request</button>
+            {submitStatus === 'success' && <p>Form sent! Returning to Home...</p>}
+            {submitStatus === 'error' && <p>Failed to send. Try again.</p>}
+          </form>
+        </div>
       </div>
     </div>
   );
 };
 
-export default HireForm; 
+export default HireForm;

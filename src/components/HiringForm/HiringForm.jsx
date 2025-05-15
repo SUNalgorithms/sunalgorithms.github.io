@@ -3,9 +3,25 @@ import './HiringForm.css';
 import logoImage from '../../assets/logo.jpeg';
 import { sendEmail } from '../../utils/emailService';
 
-const HiringForm = ({ isOpen, onClose }) => {
-  console.log('HiringForm rendered, isOpen:', isOpen);
-  
+const paths = [
+  {
+    label: 'Developer',
+    value: 'developer',
+    description: 'Apply as a software developer and join our engineering team.',
+    icon: '💻',
+    color: 'linear-gradient(135deg, #4ecdc4, #156e2e)',
+  },
+  {
+    label: 'Designer',
+    value: 'designer',
+    description: 'Show your creative skills as a UI/UX or graphic designer.',
+    icon: '🎨',
+    color: 'linear-gradient(135deg, #ff6b6b, #f8b500)',
+  },
+  // Add more paths as needed
+];
+
+const HiringForm = ({ isOpen, step = 0, onClose, onBack, onPathChosen }) => {
   const [formData, setFormData] = useState({
     firstName: '',
     surname: '',
@@ -13,50 +29,39 @@ const HiringForm = ({ isOpen, onClose }) => {
     address: '',
     phone: '',
     email: '',
-    // ... other form fields
+    path: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const formData = {
-        firstName: e.target.firstName.value,
-        surname: e.target.surname.value,
-        email: e.target.email.value,
-        phone: e.target.phone.value,
-        residence: e.target.residence.value,
-        address: e.target.address.value
-      };
-
-      const response = await fetch('https://sunalgorithms-backend.onrender.com/api/applications', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData)
-      });
-
-      if (response.ok) {
-        alert('Application submitted successfully!');
-        onClose();
-        // Form will be sent to your backend email
-      } else {
-        throw new Error('Failed to submit application');
-      }
-    } catch (error) {
-      console.error('Error:', error);
-      alert('Failed to submit application. Please try again.');
-    }
+  // Handle path selection
+  const handlePathSelect = (path) => {
+    setFormData((prev) => ({ ...prev, path }));
+    if (onPathChosen) onPathChosen();
   };
 
+  // Handle form input
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
+  };
+
+  // Handle form submit
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+    const success = await sendEmail(formData, 'hiring');
+    setIsSubmitting(false);
+    setSubmitStatus(success ? 'success' : 'error');
+    if (success) {
+      setTimeout(() => {
+        onClose();
+      }, 1500);
+    }
   };
 
   if (!isOpen) return null;
@@ -65,115 +70,137 @@ const HiringForm = ({ isOpen, onClose }) => {
     <div className="hiring-modal-overlay">
       <div className="hiring-modal">
         <div className="hiring-modal-header">
-          <button className="close-button" onClick={onClose}>
-            ✕
-          </button>
+          <div className="header-buttons">
+            {step === 1 && (
+              <button className="back-button styled-header-btn" onClick={onBack}>← Back</button>
+            )}
+            <button className="close-button styled-header-btn" onClick={onClose}>✕</button>
+          </div>
           <img src={logoImage} alt="SUNalgorithms" className="modal-logo" />
         </div>
-
         <div className="hiring-modal-content">
-          <h2>Application Form</h2>
-          <form className="hiring-form" onSubmit={handleSubmit}>
-            <div className="form-section">
-              <h3>Personal Details</h3>
-              
-              <div className="form-group">
-                <label htmlFor="firstName">First Name *</label>
-                <input 
-                  type="text" 
-                  id="firstName" 
-                  name="firstName"
-                  value={formData.firstName}
-                  onChange={handleChange}
-                  required 
-                  placeholder="Enter your first name"
-                />
+          {step === 0 ? (
+            <>
+              <h2 className="hiring-title">Get Hired at SUNalgorithms</h2>
+              <p className="hiring-desc">
+                Choose the path that best describes your skills and interests. We are always looking for talented individuals to join our team!
+              </p>
+              <div className="hiring-path-options">
+                {paths.map((p) => (
+                  <button
+                    key={p.value}
+                    className="hiring-path-card"
+                    style={{ background: p.color }}
+                    onClick={() => handlePathSelect(p.value)}
+                  >
+                    <span className="hiring-path-icon">{p.icon}</span>
+                    <span className="hiring-path-label">{p.label}</span>
+                    <span className="hiring-path-desc">{p.description}</span>
+                  </button>
+                ))}
               </div>
-
-              <div className="form-group">
-                <label htmlFor="surname">Surname *</label>
-                <input 
-                  type="text" 
-                  id="surname" 
-                  name="surname"
-                  value={formData.surname}
-                  onChange={handleChange}
-                  required 
-                  placeholder="Enter your surname"
-                />
+            </>
+          ) : (
+            <>
+              <div className="form-header">
+                <button className="back-button styled-header-btn" onClick={onBack}>← Back</button>
+                <h2>Application Form</h2>
               </div>
-
-              <div className="form-group">
-                <label htmlFor="email">Email *</label>
-                <input 
-                  type="email" 
-                  id="email" 
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required 
-                  placeholder="Enter your email"
-                />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="phone">Phone Number *</label>
-                <input 
-                  type="tel" 
-                  id="phone" 
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  required 
-                  placeholder="Enter your phone number"
-                />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="residence">Residence *</label>
-                <input 
-                  type="text" 
-                  id="residence" 
-                  name="residence"
-                  value={formData.residence}
-                  onChange={handleChange}
-                  required 
-                  placeholder="Enter your residence"
-                />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="address">Address *</label>
-                <textarea 
-                  id="address" 
-                  name="address"
-                  value={formData.address}
-                  onChange={handleChange}
-                  required 
-                  placeholder="Enter your full address"
-                  rows="3"
-                ></textarea>
-              </div>
-            </div>
-
-            <div className="form-actions">
-              <button 
-                type="submit" 
-                className="submit-button"
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? 'Submitting...' : 'Submit Application'}
-              </button>
-            </div>
-
-            {submitStatus && (
-              <div className={`submit-status ${submitStatus}`}>
-                {submitStatus === 'success' 
-                  ? 'Application submitted successfully!' 
-                  : 'Error submitting application. Please try again.'}
-              </div>
-            )}
-          </form>
+              <form className="hiring-form" onSubmit={handleSubmit}>
+                <div className="form-section">
+                  <h3>Personal Details</h3>
+                  <div className="form-group">
+                    <label htmlFor="firstName">First Name *</label>
+                    <input
+                      type="text"
+                      id="firstName"
+                      name="firstName"
+                      value={formData.firstName}
+                      onChange={handleChange}
+                      required
+                      placeholder="Enter your first name"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="surname">Surname *</label>
+                    <input
+                      type="text"
+                      id="surname"
+                      name="surname"
+                      value={formData.surname}
+                      onChange={handleChange}
+                      required
+                      placeholder="Enter your surname"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="email">Email *</label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
+                      placeholder="Enter your email"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="phone">Phone Number *</label>
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      required
+                      placeholder="Enter your phone number"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="residence">Residence *</label>
+                    <input
+                      type="text"
+                      id="residence"
+                      name="residence"
+                      value={formData.residence}
+                      onChange={handleChange}
+                      required
+                      placeholder="Enter your residence"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="address">Address *</label>
+                    <textarea
+                      id="address"
+                      name="address"
+                      value={formData.address}
+                      onChange={handleChange}
+                      required
+                      placeholder="Enter your full address"
+                      rows="3"
+                    ></textarea>
+                  </div>
+                </div>
+                <div className="form-actions">
+                  <button
+                    type="submit"
+                    className="submit-button"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? 'Submitting...' : 'Submit Application'}
+                  </button>
+                </div>
+                {submitStatus && (
+                  <div className={`submit-status ${submitStatus}`}>
+                    {submitStatus === 'success'
+                      ? 'Application submitted successfully! Returning to Home...'
+                      : 'Error submitting application. Please try again.'}
+                  </div>
+                )}
+              </form>
+            </>
+          )}
         </div>
       </div>
     </div>

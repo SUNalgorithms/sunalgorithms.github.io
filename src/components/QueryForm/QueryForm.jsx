@@ -3,7 +3,7 @@ import './QueryForm.css';
 import logoImage from '../../assets/logo.jpeg';
 import { sendEmail } from '../../utils/emailService';
 
-const QueryForm = ({ isOpen, onClose, category }) => {
+const QueryForm = ({ isOpen, onClose, onBack, category }) => {
   const [formData, setFormData] = useState({
     queryTitle: '',
     queryDescription: '',
@@ -62,15 +62,25 @@ const QueryForm = ({ isOpen, onClose, category }) => {
     <div className="query-modal-overlay">
       <div className="query-modal">
         <div className="query-modal-header">
-          <button 
-            className="close-button" 
-            onClick={onClose}
-            aria-label="Close"
-          >
-            ✕
-          </button>
-          <h2>{getCategoryTitle()}</h2>
           <img src={logoImage} alt="SUNalgorithms" className="modal-logo" />
+          <h2 className="query-header-title">{getCategoryTitle()}</h2>
+          {onBack ? (
+            <button
+              className="back-button styled-header-btn"
+              onClick={onBack}
+              aria-label="Back"
+            >
+              ← Back
+            </button>
+          ) : (
+            <button
+              className="close-button styled-header-btn"
+              onClick={onClose}
+              aria-label="Close"
+            >
+              ✕
+            </button>
+          )}
         </div>
 
         <div className="query-modal-content">
@@ -205,4 +215,4 @@ const QueryForm = ({ isOpen, onClose, category }) => {
   );
 };
 
-export default QueryForm; 
+export default QueryForm;
