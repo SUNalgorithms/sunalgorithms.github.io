@@ -195,6 +195,39 @@ function App() {
               </div>
             </div>
 
+            <div className="gallery-animatic-mobile">
+              <div className="gallery-section programmers anim-slide-left">
+                <h2>Programmers</h2>
+                <div className="slideshow-container">
+                  <div className="slides">
+                    {images.programmers.map((img, index) => (
+                      <div key={index} className="slide">
+                        <img
+                          src={img}
+                          alt={`Programmer ${index + 1}`}
+                          onLoad={() => handleImageLoad('programmers', index)}
+                          onError={(e) => handleImageError(e, 'programmers', index)}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+              <div className="gallery-section team anim-slide-right">
+                <h2>Team</h2>
+                <div className="slideshow-container">
+                  <div className="slide">
+                    <img
+                      src={images.team[0]}
+                      alt="Team"
+                      onLoad={() => handleImageLoad('team', 0)}
+                      onError={(e) => handleImageError(e, 'team', 0)}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
             {/* Hero Section */}
             <div className="hero-section">
               <h1>Empowering Your Tech Journey</h1>
