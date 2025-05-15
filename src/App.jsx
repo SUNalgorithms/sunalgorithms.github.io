@@ -154,8 +154,7 @@ function App() {
       case 0:
         return (
           <div className="home-content">
-            <div className="gallery-grid-container">
-              {/* Programmers Section */}
+            <div className="gallery-pair-container">
               <div className="gallery-section programmers">
                 <h2>Programmers</h2>
                 <div className="slideshow-container">
@@ -181,7 +180,6 @@ function App() {
                 </div>
               </div>
 
-              {/* Team Section */}
               <div className="gallery-section team">
                 <h2>Team</h2>
                 <div className="slideshow-container">

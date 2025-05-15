@@ -1368,3 +1368,68 @@ h2 {
     margin-top: 4px;
   }
 }
+
+/* Equal size for both frames and images */
+.gallery-pair-container {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 12px;
+  margin: 0 auto 12px auto;
+  width: 100%;
+  max-width: 400px;
+}
+
+.gallery-section.programmers,
+.gallery-section.team {
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 180px;
+  min-height: 120px;
+  height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 2px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* Make images exactly the same size and centered */
+.gallery-section.programmers img,
+.gallery-section.team img,
+.programmers .slide img,
+.team .slide img {
+  width: 83px !important;
+  height: 87px !important;
+  object-fit: cover;
+  border-radius: 6px;
+  margin: 0 auto;
+  display: block;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+/* On mobile, stack vertically */
+@media (max-width: 600px) {
+  .gallery-pair-container {
+    flex-direction: column;
+    max-width: 98vw;
+    gap: 8px;
+  }
+  .gallery-section.programmers,
+  .gallery-section.team {
+    max-width: 98vw;
+    height: 100px;
+    min-height: 100px;
+    margin: 0 auto;
+  }
+  .gallery-section.programmers img,
+  .gallery-section.team img,
+  .programmers .slide img,
+  .team .slide img {
+    width: 83px !important;
+    height: 87px !important;
+  }
+}
