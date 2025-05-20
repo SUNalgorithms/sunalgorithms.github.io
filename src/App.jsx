@@ -119,7 +119,6 @@ function App() {
     return () => clearInterval(interval);
   }, []);
 
-
   const handleTabClick = (tabId) => {
     setActiveTab(tabId);
     if (tabId === 1) {
@@ -154,8 +153,10 @@ function App() {
       case 0:
         return (
           <div className="home-content">
-            <div className="gallery-pair-container">
+            {/* Only one programmers frame, centered */}
+            <div className="gallery-single-container">
               <div className="gallery-section programmers">
+                <div className="programmers-welcome">Welcome to sunalgorithms</div>
                 <h2>Programmers</h2>
                 <div className="slideshow-container">
                   <div
@@ -176,53 +177,6 @@ function App() {
                         />
                       </div>
                     ))}
-                  </div>
-                </div>
-              </div>
-
-              <div className="gallery-section team">
-                <h2>Team</h2>
-                <div className="slideshow-container">
-                  <div className="slide">
-                    <img
-                      src={images.team[0]}
-                      alt="Team"
-                      onLoad={() => handleImageLoad('team', 0)}
-                      onError={(e) => handleImageError(e, 'team', 0)}
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="gallery-animatic-mobile">
-              <div className="gallery-section programmers anim-slide-left">
-                <h2>Programmers</h2>
-                <div className="slideshow-container">
-                  <div className="slides">
-                    {images.programmers.map((img, index) => (
-                      <div key={index} className="slide">
-                        <img
-                          src={img}
-                          alt={`Programmer ${index + 1}`}
-                          onLoad={() => handleImageLoad('programmers', index)}
-                          onError={(e) => handleImageError(e, 'programmers', index)}
-                        />
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-              <div className="gallery-section team anim-slide-right">
-                <h2>Team</h2>
-                <div className="slideshow-container">
-                  <div className="slide">
-                    <img
-                      src={images.team[0]}
-                      alt="Team"
-                      onLoad={() => handleImageLoad('team', 0)}
-                      onError={(e) => handleImageError(e, 'team', 0)}
-                    />
                   </div>
                 </div>
               </div>
